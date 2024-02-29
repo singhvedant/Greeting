@@ -52,22 +52,20 @@ public class GreetingService {
         }
     }
 
-    public String deleteALLGreetings() {
+    public void deleteALLGreetings() throws Exception {
         try {
             repo.deleteAll();
-            return "Successfully Deleted";
         } catch (Exception e){
             e.printStackTrace();
-            return "Internal error in deleting service.";
+            throw new Exception("Internal error in deleting service.");
         }
     }
-    public String deleteGreeting(int id) {
+    public void deleteGreeting(int id) throws Exception {
         try {
             repo.deleteById(id);
-            return "Successfully Deleted";
         } catch (Exception e){
             e.printStackTrace();
-            return "Internal error in deleting service.";
+            throw new Exception("Internal error in deleting service.");
         }
     }
 }

@@ -4,6 +4,8 @@ package com.bridgelabz.greeting.controller;
 import com.bridgelabz.greeting.model.Greeting;
 import com.bridgelabz.greeting.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,14 +39,24 @@ public class GreetingController {
     }
 
     @DeleteMapping("/delete/all")
-    public String deleteGreeting() {
-        return service.deleteALLGreetings();
+    public ResponseEntity<HttpStatus> deleteGreeting() {
+        try {
+            service.deleteALLGreetings();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public String deleteGreeting(@PathVariable int id) {
-        return service.deleteGreeting(id);
+    public ResponseEntity<HttpStatus> deleteGreeting(@PathVariable int id) {
+        try {
+            service.deleteGreeting(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
